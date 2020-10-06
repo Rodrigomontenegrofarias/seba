@@ -1,4 +1,3 @@
-const { deleteArea } = require('./area.controller');
 const Area = require('./area.model'); // post model
 
 module.exports = {

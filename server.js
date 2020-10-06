@@ -17,7 +17,9 @@ app.use(bodyParser.json());
 
 // Routes
 const areaRouter = require('./src/api/areas/area.router');
+const centroRouter = require('./src/api/centros/centro.router');
 app.use('/areas', areaRouter);
+app.use('/centros', centroRouter);
 
 router = express.Router();
 // will redirect all the non-api routes to react frontend
