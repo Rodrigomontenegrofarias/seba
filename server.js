@@ -3,34 +3,28 @@ const express = require('express');
 const app = express();
 const PORT = 8080;
 
+//api
 app.get('/', (req, res) => {
-    res.send("Hello World ! ");
-});
-
-app.listen(PORT, function () {
-    console.log(`Server Listening on ${PORT}`);
+    res.send("API LECOFQ UP!");
 });
 
 // Our DB Configuration
 require('./src/database');
 
 const bodyParser = require('body-parser');
-
-// Routes
-const postRouter = require('./src/routes/post.router');
-
-app.use(
-  bodyParser.urlencoded({
-    extended: true
-  })
-);
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-app.use('/posts', postRouter);
+// Routes
+const areaRouter = require('./src/api/areas/area.router');
+app.use('/areas', areaRouter);
 
 router = express.Router();
-
 // will redirect all the non-api routes to react frontend
 router.use(function(req, res) {
     res.sendFile(path.join(__dirname, '../client','build','index.html'));
+});
+
+app.listen(PORT, function () {
+  console.log(`Server Listening on ${PORT}`);
 });
