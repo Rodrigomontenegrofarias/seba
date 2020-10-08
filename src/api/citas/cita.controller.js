@@ -1,14 +1,14 @@
-const centroServices = require('./centro.service');
+const citaServices = require('./cita.service');
 
 module.exports = {
 
-    async createCentro(req, res, next) {
+    async createCita(req, res, next) {
         try {
-            const result = await centroServices.createCentro(req.body);
+            const result = await citaServices.createCita(req.body);
             if (!result) {
                 return res.json({
                     status: 'failed',
-                    msg: "Error al crear un Centro.",
+                    msg: "Error al crear una Cita.",
                     code: 0
                 });
             }
@@ -22,13 +22,13 @@ module.exports = {
         }
     },
 
-    async updateCentro(req, res, next) {
+    async updateCita(req, res, next) {
         try {
-            const result = await centroServices.updateCentro(req.params.id, req.body);
+            const result = await citaServices.updateCita(req.params.id, req.body);
             if (!result) {
                 return res.json({
                     status: 'failed',
-                    msg: "No se puede actualizar el Centro.",
+                    msg: "No se puede actualizar la Cita.",
                     success: 0
                 });
             }
@@ -41,52 +41,13 @@ module.exports = {
         }
 
     },
-    async deleteCentro(req, res, next) {
+    async deleteCita(req, res, next) {
         try {
-            const result = await centroServices.deleteCentro(req.params.id);
+            const result = await citaServices.deleteCita(req.params.id);
             if (!result) {
                 return res.json({
                     status: 'failed',
-                    msg: "No se puede borrar el Centro.",
-                    success: 0
-                });
-            }
-            return res.json({
-                status: 'success',
-                data: result
-            });
-        } catch (exception) {
-            next(exception);
-        }
-    },
-
-    async getCentros(req, res, next) {
-        try {
-            const result = await centroServices.getCentros();
-            if (!result) {
-                return res.json({
-                    status: 'failed',
-                    msg: "Error al obtener los Centros.",
-                    success: 0
-                });
-            }
-            return res.json({
-                status: 'success',
-                data: result
-            });
-        } catch (exception) {
-            next(exception);
-        }
-
-    },
-
-    async getCentro(req, res, next) {
-        try {
-            const result = await centroServices.getCentro(req.params.id);
-            if (!result) {
-                return res.json({
-                    status: 'failed',
-                    msg: "No se puede retornar el Centro.",
+                    msg: "No se puede borrar la Cita.",
                     success: 0
                 });
             }
@@ -100,6 +61,43 @@ module.exports = {
     },
 
 
+    async getCitas(req, res, next) {
+        try {
+            const result = await citaServices.getCitas();
+            if (!result) {
+                return res.json({
+                    status: 'failed',
+                    msg: "Error al obtener las Citas.",
+                    success: 0
+                });
+            }
+            return res.json({
+                status: 'success',
+                data: result
+            });
+        } catch (exception) {
+            next(exception);
+        }
 
+    },
+
+    async getCita(req, res, next) {
+        try {
+            const result = await citaServices.getCita(req.params.id);
+            if (!result) {
+                return res.json({
+                    status: 'failed',
+                    msg: "No se puede retornar la Cita.",
+                    success: 0
+                });
+            }
+            return res.json({
+                status: 'success',
+                data: result
+            });
+        } catch (exception) {
+            next(exception);
+        }
+    },
 
 }
