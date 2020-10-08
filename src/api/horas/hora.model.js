@@ -16,5 +16,5 @@ const horaSchema = new mongoose.Schema({
     }
 });
 
-const Hora = mongoose.model("Area", horaSchema);
+const Hora = mongoose.model("Hora", horaSchema);
 module.exports = Hora;
