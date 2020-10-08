@@ -6,7 +6,7 @@ POST {{url}}/areas/
 Content-Type: application/json
 
 {
-    "name": "Nombre del area de prueba"
+    "name": "Area de prueba"
 }
 ###
 GET {{url}}/areas/5f7f6f7992daeb00282ddf2d
@@ -20,4 +20,4 @@ Content-Type: application/json
 }
 
 ###
-DELETE {{url}}/areas/5f7f6f7992daeb00282ddf2d
+DELETE {{url}}/areas/5f7f704392daeb00282ddf2f

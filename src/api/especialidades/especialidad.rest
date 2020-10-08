@@ -1,0 +1,26 @@
+@url = http://localhost:8080
+#
+GET {{url}}/especialidades/
+###
+POST {{url}}/especialidades/
+Content-Type: application/json
+
+{
+    "name": "Nueva especialidad",
+    "duracionConsulta": 1,
+    "idArea": "5f7f72df92daeb00282ddf34"
+}
+###
+GET {{url}}/especialidades/5f7f72f392daeb00282ddf35
+
+###
+
+PUT {{url}}/especialidades/5f7f72c092daeb00282ddf33
+Content-Type: application/json
+
+{
+    "name": "nueva especialidad 2 v2.0"
+}
+
+###
+DELETE {{url}}/especialidades/5f7f72c092daeb00282ddf33
