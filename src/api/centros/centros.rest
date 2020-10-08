@@ -1,0 +1,24 @@
+@url = http://localhost:8080
+#
+GET {{url}}/centros/
+###
+POST {{url}}/centros/
+Content-Type: application/json
+
+{
+    "name": "Nuevo centro 2"
+}
+###
+GET {{url}}/centros/5f7f711d92daeb00282ddf31
+
+###
+
+PUT {{url}}/centros/5f7f711d92daeb00282ddf31
+Content-Type: application/json
+
+{
+    "name": "nuevo centro 2 v2.0"
+}
+
+###
+DELETE {{url}}/centros/5f7f711d92daeb00282ddf31
