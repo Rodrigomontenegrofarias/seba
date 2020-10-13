@@ -11,9 +11,9 @@ step-develop:
   before_script:
     - export DYNAMIC_ENV_VAR=DEVELOP
   only:
-    - develop
+    - testing
   tags:
-    - develop
+    - testing
   script:
     - echo running tests in $DYNAMIC_ENV_VAR
 
@@ -22,9 +22,9 @@ step-release:
   before_script:
     - export DYNAMIC_ENV_VAR=UAT
   only:
-    - release
+    - master
   tags:
-    - release
+    - master
   script:
     - echo setting up env $DYNAMIC_ENV_VAR
     - sudo apt-get install -y python-pip
