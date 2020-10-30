@@ -2,10 +2,10 @@
 const mongoose = require('mongoose');
 
 const rutinaSchema = new mongoose.Schema({
-    test: {
-        type: String,
+    fecha: {
+        type: Date,
         required: true
-    }
+    },
 });
 
 const Rutina = mongoose.model("Rutina", rutinaSchema);
