@@ -19,6 +19,10 @@ const ejercicioSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    repeticiones:{
+        type: String,
+        required: true
+    },
 });
 
 const Ejercicio = mongoose.model("Ejercicio", ejercicioSchema);
