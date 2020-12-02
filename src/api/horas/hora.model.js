@@ -13,6 +13,9 @@ const horaSchema = new mongoose.Schema({
     idCita: {
         type: Schema.Types.ObjectId,
         ref: 'Cita'
+    },
+    diaSemana: {
+        type: String,
     }
 });
 

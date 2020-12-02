@@ -2,7 +2,8 @@
 const express = require('express');
 const app = express();
 const PORT = 8080;
-
+var cors = require('cors')
+app.use(cors())
 //api
 app.get('/', (req, res) => {
     res.send("API LECOFQ UP!");
