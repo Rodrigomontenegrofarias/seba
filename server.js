@@ -4,10 +4,6 @@ const app = express();
 const PORT = 8080;
 const cors = require('cors');
 
-const cors = require('cors');
-
-app.use(cors());
-
 //api
 app.use(cors());
 app.get('/', (req, res) => {
@@ -30,13 +26,19 @@ const especialidadRouter = require('./src/api/especialidades/especialidad.router
 const citaRouter = require('./src/api/citas/cita.router');
 const horaRouter = require('./src/api/horas/hora.router');
 const rutinaRouter = require('./src/api/rutina/rutina.router')
+const especialistaRouter = require('./src/api/especialistas/especialista.router');
+const pacienteRouter = require('./src/api/pacientes/paciente.router');
+
 
 app.use('/areas', areaRouter);
 app.use('/centros', centroRouter);
 app.use('/especialidades', especialidadRouter);
 app.use('/citas',citaRouter);
 app.use('/horas',horaRouter);
+app.use('/especialistas',especialistaRouter);
+app.use('/pacientes',pacienteRouter);
 app.use('/rutina',rutinaRouter)
+
 
 router = express.Router();
 // will redirect all the non-api routes to react frontend
