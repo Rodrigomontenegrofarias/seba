@@ -1,14 +1,14 @@
-const PacienteServices = require('./paciente.service');
+const ejercicioServices = require('./ejercicio.service');
 
 module.exports = {
 
-    async createPaciente(req, res, next) {
+    async createEjercicio(req, res, next) {
         try {
-            const result = await PacienteServices.createPaciente(req.body);
+            const result = await ejercicioServices.createEjercicio(req.body);
             if (!result) {
                 return res.json({
                     status: 'failed',
-                    msg: "Error al crear una Paciente.",
+                    msg: "Error al crear un Ejercicio.",
                     code: 0
                 });
             }
@@ -22,13 +22,13 @@ module.exports = {
         }
     },
 
-    async updatePaciente(req, res, next) {
+    async updateEjercicio(req, res, next) {
         try {
-            const result = await PacienteServices.updatePaciente(req.params.id, req.body);
+            const result = await ejercicioServices.updateEjercicio(req.params.id, req.body);
             if (!result) {
                 return res.json({
                     status: 'failed',
-                    msg: "No se puede actualizar la Paciente.",
+                    msg: "No se puede actualizar el Ejercicio.",
                     success: 0
                 });
             }
@@ -41,13 +41,52 @@ module.exports = {
         }
 
     },
-    async deletePaciente(req, res, next) {
+    async deleteEjercicio(req, res, next) {
         try {
-            const result = await PacienteServices.deletePaciente(req.params.id);
+            const result = await ejercicioServices.deleteEjercicio(req.params.id);
             if (!result) {
                 return res.json({
                     status: 'failed',
-                    msg: "No se puede borrar la Paciente.",
+                    msg: "No se puede borrar el Ejercicio.",
+                    success: 0
+                });
+            }
+            return res.json({
+                status: 'success',
+                data: result
+            });
+        } catch (exception) {
+            next(exception);
+        }
+    },
+
+    async getEjercicios(req, res, next) {
+        try {
+            const result = await ejercicioServices.getEjercicios();
+            if (!result) {
+                return res.json({
+                    status: 'failed',
+                    msg: "Error al obtener los Ejercicios.",
+                    success: 0
+                });
+            }
+            return res.json({
+                status: 'success',
+                data: result
+            });
+        } catch (exception) {
+            next(exception);
+        }
+
+    },
+
+    async getEjercicio(req, res, next) {
+        try {
+            const result = await ejercicioServices.getEjercicio(req.params.id);
+            if (!result) {
+                return res.json({
+                    status: 'failed',
+                    msg: "No se puede retornar el Ejercicio.",
                     success: 0
                 });
             }
@@ -61,43 +100,6 @@ module.exports = {
     },
 
 
-    async getPacientes(req, res, next) {
-        try {
-            const result = await PacienteServices.getPacientes();
-            if (!result) {
-                return res.json({
-                    status: 'failed',
-                    msg: "Error al obtener las Pacientes.",
-                    success: 0
-                });
-            }
-            return res.json({
-                status: 'success',
-                data: result
-            });
-        } catch (exception) {
-            next(exception);
-        }
 
-    },
-
-    async getPaciente(req, res, next) {
-        try {
-            const result = await PacienteServices.getPaciente(req.params.id);
-            if (!result) {
-                return res.json({
-                    status: 'failed',
-                    msg: "No se puede retornar la Paciente.",
-                    success: 0
-                });
-            }
-            return res.json({
-                status: 'success',
-                data: result
-            });
-        } catch (exception) {
-            next(exception);
-        }
-    },
 
 }
