@@ -11,20 +11,25 @@ step-develop:
   before_script:
     - export DYNAMIC_ENV_VAR=DEVELOP
   only:
-    - develop
+    - testing
   tags:
-    - develop
+    - testing
   script:
     - echo running tests in $DYNAMIC_ENV_VAR
+    - echo setting up env $DYNAMIC_ENV_VAR
+    - sudo apt-get install -y python-pip
+    - sudo pip install docker-compose
+    - sudo docker image prune -f
+    - sudo docker-compose -f docker-compose.yml up --build
 
 step-release:
   stage: deploy
   before_script:
     - export DYNAMIC_ENV_VAR=UAT
   only:
-    - release
+    - master
   tags:
-    - release
+    - master
   script:
     - echo setting up env $DYNAMIC_ENV_VAR
     - sudo apt-get install -y python-pip
