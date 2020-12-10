@@ -33,6 +33,13 @@ EspecialistaRouter.get(
     '/:id/horarios',
     EspecialistaController.getHorariosEspecialista);
 
+//Get All Horarios from Especialista
+EspecialistaRouter.get(
+    '/:id/horas',
+    EspecialistaController.getHorasEspecialista);
+
+    
+
 //Get All Citas from Especialista
 EspecialistaRouter.get(
     '/:id/citas',

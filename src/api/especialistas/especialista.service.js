@@ -1,4 +1,5 @@
 const Especialista = require('./especialista.model'); // Especialista model
+const Horario = require('../horario/horario.model');
 const Hora = require('../horas/hora.model');
 const Cita = require('../citas/cita.model');
 
@@ -30,11 +31,15 @@ module.exports = {
 
     //Get citas de especialista
     async getHorariosEspecialista(id) {
+        return await Horario.find({ idEspecialista: id });
+    },
+    //Get citas de especialista
+    async getHorasEspecialista(id) {
         return await Hora.find({ idEspecialista: id });
     },
     //Get citas de especialista
     async getHorariosWeekDay(id, weekDay) {
-        return await Hora.find(
+        return await Horario.find(
             { 
                 idEspecialista: id,
                 diaSemana: weekDay
