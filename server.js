@@ -36,7 +36,7 @@ const citaRouter = require('./src/api/citas/cita.router');
 const horaRouter = require('./src/api/horas/hora.router');
 const rutinaRouter = require('./src/api/rutina/rutina.router')
 const especialistaRouter = require('./src/api/especialistas/especialista.router');
-
+const horarioRouter = require('./src/api/horario/horario.router');
 const ejercicioRouter = require('./src/api/ejercicio/ejercicio.router');
 const pacienteRouter = require('./src/api/paciente/paciente.router');
 const fichaPacienteRouter = require('./src/api/fichaPaciente/fichaPaciente.router');
@@ -46,6 +46,8 @@ app.use('/centros', centroRouter);
 app.use('/especialidades', especialidadRouter);
 app.use('/citas',citaRouter);
 app.use('/horas',horaRouter);
+app.use('/horario',horarioRouter);
+
 app.use('/especialistas',especialistaRouter);
 app.use('/rutina',rutinaRouter)
 app.use('/ejercicio',ejercicioRouter);
