@@ -7,6 +7,12 @@ dotenv.config();
 const PORT = process.env.PORT
 //const cors = require('cors');
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 //api
 //app.use(cors());
 app.get('/', (req, res) => {
