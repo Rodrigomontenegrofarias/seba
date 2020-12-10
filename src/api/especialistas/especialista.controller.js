@@ -100,4 +100,69 @@ module.exports = {
         }
     },
 
+
+    //Get citas de especialista
+    async getCitasEspecialista(req, res, next) {
+        try {
+            const result = await EspecialistaServices.getCitasEspecialista(req.params.id);
+            if (!result) {
+                return res.json({
+                    status: 'failed',
+                    msg: "Error al obtener las Especialistas.",
+                    success: 0
+                });
+            }
+            return res.json({
+                status: 'success',
+                data: result
+            });
+        } catch (exception) {
+            next(exception);
+        }
+
+    },
+
+    //Get horarios de especialista
+    async getHorariosEspecialista(req, res, next) {
+        try {
+            const result = await EspecialistaServices.getHorariosEspecialista(req.params.id);
+            if (!result) {
+                return res.json({
+                    status: 'failed',
+                    msg: "Error al obtener las Especialistas.",
+                    success: 0
+                });
+            }
+            return res.json({
+                status: 'success',
+                data: result
+            });
+        } catch (exception) {
+            next(exception);
+        }
+
+    },
+
+    //Get horarios de un dia de semana de un especialista
+    async getHorariosWeekDay(req, res, next) {
+        try {
+            const result = await EspecialistaServices.getHorariosWeekDay(req.params.id,req.params.weekDay);
+            if (!result) {
+                return res.json({
+                    status: 'failed',
+                    msg: "Error al obtener las Especialistas.",
+                    success: 0
+                });
+            }
+            return res.json({
+                status: 'success',
+                data: result
+            });
+        } catch (exception) {
+            next(exception);
+        }
+
+    },
+    
+
 }
