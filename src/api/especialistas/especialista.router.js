@@ -28,4 +28,21 @@ EspecialistaRouter.get(
     '/:id',
     EspecialistaController.getEspecialista);
 
+//Get All Horarios from Especialista
+EspecialistaRouter.get(
+    '/:id/horarios',
+    EspecialistaController.getHorariosEspecialista);
+
+//Get All Citas from Especialista
+EspecialistaRouter.get(
+    '/:id/citas',
+    EspecialistaController.getCitasEspecialista);
+
+//Get All horarios de un dia de semana
+EspecialistaRouter.get(
+    '/:id/horarios/:weekDay',
+    EspecialistaController.getHorariosWeekDay);
+
+
+
 module.exports = EspecialistaRouter;
