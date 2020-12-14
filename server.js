@@ -1,28 +1,11 @@
 // server.js
 const express = require('express');
 const app = express();
+const PORT = 8080;
+const cors = require('cors');
 
-const dotenv = require('dotenv');
-dotenv.config();
-const PORT = process.env.PORT
-//const cors = require('cors');
-
+app.use(cors());
 //api
-//app.use(cors());
-//app.options('*', cors());
-
-app.use(function(req, res, next) {
-       res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
-    // allow preflight
-    if (req.method === 'OPTIONS') {
-        res.send(200);
-    } else {
-        next();
-    }
-});
-
 app.get('/', (req, res) => {
     res.send("API LECOFQ UP!");
 });
@@ -42,26 +25,18 @@ const centroRouter = require('./src/api/centros/centro.router');
 const especialidadRouter = require('./src/api/especialidades/especialidad.router');
 const citaRouter = require('./src/api/citas/cita.router');
 const horaRouter = require('./src/api/horas/hora.router');
-const rutinaRouter = require('./src/api/rutina/rutina.router')
-const especialistaRouter = require('./src/api/especialistas/especialista.router');
-const horarioRouter = require('./src/api/horario/horario.router');
-const ejercicioRouter = require('./src/api/ejercicio/ejercicio.router');
-const pacienteRouter = require('./src/api/paciente/paciente.router');
 const fichaPacienteRouter = require('./src/api/fichaPaciente/fichaPaciente.router');
+const fichaNutricionistaRouter = require('./src/api/fichaNutricionista/fichaNutricionista.router');
+const fichaPsicologoRouter = require('./src/api/fichaPsicologo/fichaPsicologo.router');
 
 app.use('/areas', areaRouter);
 app.use('/centros', centroRouter);
 app.use('/especialidades', especialidadRouter);
 app.use('/citas',citaRouter);
 app.use('/horas',horaRouter);
-app.use('/horario',horarioRouter);
-
-app.use('/especialistas',especialistaRouter);
-app.use('/rutina',rutinaRouter)
-app.use('/ejercicio',ejercicioRouter);
-app.use('/paciente',pacienteRouter);
 app.use('/fichaPaciente', fichaPacienteRouter);
-
+app.use('/fichaNutricionista', fichaNutricionistaRouter);
+app.use('/fichaPsicologo', fichaPsicologoRouter);
 
 router = express.Router();
 // will redirect all the non-api routes to react frontend
