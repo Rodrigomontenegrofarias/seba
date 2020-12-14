@@ -1,14 +1,14 @@
-const especialidadService = require('./especialidad.service');
+const ejercicioServices = require('./ejercicio.service');
 
 module.exports = {
 
-    async createEspecialidad(req, res, next) {
+    async createEjercicio(req, res, next) {
         try {
-            const result = await especialidadService.createEspecialidad(req.body);
+            const result = await ejercicioServices.createEjercicio(req.body);
             if (!result) {
                 return res.json({
                     status: 'failed',
-                    msg: "Error al crear una Especialidad.",
+                    msg: "Error al crear un Ejercicio.",
                     code: 0
                 });
             }
@@ -22,13 +22,51 @@ module.exports = {
         }
     },
 
-    async updateEspecialidad(req, res, next) {
+    async updateEjercicio(req, res, next) {
         try {
-            const result = await especialidadService.updateEspecialidad(req.params.id, req.body);
+            const result = await ejercicioServices.updateEjercicio(req.params.id, req.body);
             if (!result) {
                 return res.json({
                     status: 'failed',
-                    msg: "No se puede actualizar la especialidad.",
+                    msg: "No se puede actualizar el Ejercicio.",
+                    success: 0
+                });
+            }
+            return res.json({
+                status: 'success',
+                data: result
+            });
+        } catch (exception) {
+            next(exception);
+        }
+
+    },
+    async deleteEjercicio(req, res, next) {
+        try {
+            const result = await ejercicioServices.deleteEjercicio(req.params.id);
+            if (!result) {
+                return res.json({
+                    status: 'failed',
+                    msg: "No se puede borrar el Ejercicio.",
+                    success: 0
+                });
+            }
+            return res.json({
+                status: 'success',
+                data: result
+            });
+        } catch (exception) {
+            next(exception);
+        }
+    },
+
+    async getEjercicios(req, res, next) {
+        try {
+            const result = await ejercicioServices.getEjercicios();
+            if (!result) {
+                return res.json({
+                    status: 'failed',
+                    msg: "Error al obtener los Ejercicios.",
                     success: 0
                 });
             }
@@ -42,13 +80,13 @@ module.exports = {
 
     },
 
-    async deleteEspecialidad(req, res, next) {
+    async getEjercicio(req, res, next) {
         try {
-            const result = await especialidadService.deleteEspecialidad(req.params.id);
+            const result = await ejercicioServices.getEjercicio(req.params.id);
             if (!result) {
                 return res.json({
                     status: 'failed',
-                    msg: "No se puede borrar la especialidad.",
+                    msg: "No se puede retornar el Ejercicio.",
                     success: 0
                 });
             }
@@ -59,66 +97,6 @@ module.exports = {
         } catch (exception) {
             next(exception);
         }
-    },
-
-    async getEspecialidades(req, res, next) {
-        try {
-            const result = await especialidadService.getEspecialidades();
-            if (!result) {
-                return res.json({
-                    status: 'failed',
-                    msg: "Error al obtener las especialidades.",
-                    success: 0
-                });
-            }
-            return res.json({
-                status: 'success',
-                data: result
-            });
-        } catch (exception) {
-            next(exception);
-        }
-
-    },
-
-    async getEspecialidad(req, res, next) {
-        try {
-            const result = await especialidadService.getEspecialidad(req.params.id);
-            if (!result) {
-                return res.json({
-                    status: 'failed',
-                    msg: "No se puede retornar la especialidad.",
-                    success: 0
-                });
-            }
-            return res.json({
-                status: 'success',
-                data: result
-            });
-        } catch (exception) {
-            next(exception);
-        }
-    },
-
-    //Get horas de una especialidad
-    async getHorasEspecialidad(req, res, next) {
-        try {
-            const result = await especialidadService.getHorasEspecialidad(req.params.id);
-            if (!result) {
-                return res.json({
-                    status: 'failed',
-                    msg: "Error al obtener las Especialistas.",
-                    success: 0
-                });
-            }
-            return res.json({
-                status: 'success',
-                data: result
-            });
-        } catch (exception) {
-            next(exception);
-        }
-
     },
 
 

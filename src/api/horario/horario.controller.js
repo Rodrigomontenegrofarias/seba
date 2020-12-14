@@ -1,14 +1,14 @@
-const especialidadService = require('./especialidad.service');
+const HorarioServices = require('./horario.service');
 
 module.exports = {
 
-    async createEspecialidad(req, res, next) {
+    async createHorario(req, res, next) {
         try {
-            const result = await especialidadService.createEspecialidad(req.body);
+            const result = await HorarioServices.createHorario(req.body);
             if (!result) {
                 return res.json({
                     status: 'failed',
-                    msg: "Error al crear una Especialidad.",
+                    msg: "Error al crear una Horario.",
                     code: 0
                 });
             }
@@ -22,13 +22,52 @@ module.exports = {
         }
     },
 
-    async updateEspecialidad(req, res, next) {
+    async updateHorario(req, res, next) {
         try {
-            const result = await especialidadService.updateEspecialidad(req.params.id, req.body);
+            const result = await HorarioServices.updateHorario(req.params.id, req.body);
             if (!result) {
                 return res.json({
                     status: 'failed',
-                    msg: "No se puede actualizar la especialidad.",
+                    msg: "No se puede actualizar la Horario.",
+                    success: 0
+                });
+            }
+            return res.json({
+                status: 'success',
+                data: result
+            });
+        } catch (exception) {
+            next(exception);
+        }
+
+    },
+    async deleteHorario(req, res, next) {
+        try {
+            const result = await HorarioServices.deleteHorario(req.params.id);
+            if (!result) {
+                return res.json({
+                    status: 'failed',
+                    msg: "No se puede borrar la Horario.",
+                    success: 0
+                });
+            }
+            return res.json({
+                status: 'success',
+                data: result
+            });
+        } catch (exception) {
+            next(exception);
+        }
+    },
+
+
+    async getHorarios(req, res, next) {
+        try {
+            const result = await HorarioServices.getHorarios();
+            if (!result) {
+                return res.json({
+                    status: 'failed',
+                    msg: "Error al obtener las Horarios.",
                     success: 0
                 });
             }
@@ -42,13 +81,13 @@ module.exports = {
 
     },
 
-    async deleteEspecialidad(req, res, next) {
+    async getHorario(req, res, next) {
         try {
-            const result = await especialidadService.deleteEspecialidad(req.params.id);
+            const result = await HorarioServices.getHorario(req.params.id);
             if (!result) {
                 return res.json({
                     status: 'failed',
-                    msg: "No se puede borrar la especialidad.",
+                    msg: "No se puede retornar la Horario.",
                     success: 0
                 });
             }
@@ -60,68 +99,5 @@ module.exports = {
             next(exception);
         }
     },
-
-    async getEspecialidades(req, res, next) {
-        try {
-            const result = await especialidadService.getEspecialidades();
-            if (!result) {
-                return res.json({
-                    status: 'failed',
-                    msg: "Error al obtener las especialidades.",
-                    success: 0
-                });
-            }
-            return res.json({
-                status: 'success',
-                data: result
-            });
-        } catch (exception) {
-            next(exception);
-        }
-
-    },
-
-    async getEspecialidad(req, res, next) {
-        try {
-            const result = await especialidadService.getEspecialidad(req.params.id);
-            if (!result) {
-                return res.json({
-                    status: 'failed',
-                    msg: "No se puede retornar la especialidad.",
-                    success: 0
-                });
-            }
-            return res.json({
-                status: 'success',
-                data: result
-            });
-        } catch (exception) {
-            next(exception);
-        }
-    },
-
-    //Get horas de una especialidad
-    async getHorasEspecialidad(req, res, next) {
-        try {
-            const result = await especialidadService.getHorasEspecialidad(req.params.id);
-            if (!result) {
-                return res.json({
-                    status: 'failed',
-                    msg: "Error al obtener las Especialistas.",
-                    success: 0
-                });
-            }
-            return res.json({
-                status: 'success',
-                data: result
-            });
-        } catch (exception) {
-            next(exception);
-        }
-
-    },
-
-
-
 
 }

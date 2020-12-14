@@ -1,14 +1,14 @@
-const especialidadService = require('./especialidad.service');
+const areaServices = require('./area.service');
 
 module.exports = {
 
-    async createEspecialidad(req, res, next) {
+    async createArea(req, res, next) {
         try {
-            const result = await especialidadService.createEspecialidad(req.body);
+            const result = await areaServices.createArea(req.body);
             if (!result) {
                 return res.json({
                     status: 'failed',
-                    msg: "Error al crear una Especialidad.",
+                    msg: "Error al crear un Area.",
                     code: 0
                 });
             }
@@ -22,13 +22,13 @@ module.exports = {
         }
     },
 
-    async updateEspecialidad(req, res, next) {
+    async getAreas(req, res, next) {
         try {
-            const result = await especialidadService.updateEspecialidad(req.params.id, req.body);
+            const result = await areaServices.getAreas();
             if (!result) {
                 return res.json({
                     status: 'failed',
-                    msg: "No se puede actualizar la especialidad.",
+                    msg: "Error al obtener las Areas.",
                     success: 0
                 });
             }
@@ -42,32 +42,13 @@ module.exports = {
 
     },
 
-    async deleteEspecialidad(req, res, next) {
+    async updateArea(req, res, next) {
         try {
-            const result = await especialidadService.deleteEspecialidad(req.params.id);
+            const result = await areaServices.updateArea(req.params.id, req.body);
             if (!result) {
                 return res.json({
                     status: 'failed',
-                    msg: "No se puede borrar la especialidad.",
-                    success: 0
-                });
-            }
-            return res.json({
-                status: 'success',
-                data: result
-            });
-        } catch (exception) {
-            next(exception);
-        }
-    },
-
-    async getEspecialidades(req, res, next) {
-        try {
-            const result = await especialidadService.getEspecialidades();
-            if (!result) {
-                return res.json({
-                    status: 'failed',
-                    msg: "Error al obtener las especialidades.",
+                    msg: "No se puede actualizar el Area.",
                     success: 0
                 });
             }
@@ -80,14 +61,13 @@ module.exports = {
         }
 
     },
-
-    async getEspecialidad(req, res, next) {
+    async deleteArea(req, res, next) {
         try {
-            const result = await especialidadService.getEspecialidad(req.params.id);
+            const result = await areaServices.deleteArea(req.params.id);
             if (!result) {
                 return res.json({
                     status: 'failed',
-                    msg: "No se puede retornar la especialidad.",
+                    msg: "No se puede borrar el Area.",
                     success: 0
                 });
             }
@@ -99,15 +79,13 @@ module.exports = {
             next(exception);
         }
     },
-
-    //Get horas de una especialidad
-    async getHorasEspecialidad(req, res, next) {
+    async getArea(req, res, next) {
         try {
-            const result = await especialidadService.getHorasEspecialidad(req.params.id);
+            const result = await areaServices.getArea(req.params.id);
             if (!result) {
                 return res.json({
                     status: 'failed',
-                    msg: "Error al obtener las Especialistas.",
+                    msg: "No se puede retornar el Area.",
                     success: 0
                 });
             }
@@ -118,9 +96,8 @@ module.exports = {
         } catch (exception) {
             next(exception);
         }
-
     },
-
+    
 
 
 

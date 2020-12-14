@@ -1,7 +1,7 @@
-// hora.model.js
+// Horario.model.js
 const mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-const horaSchema = new mongoose.Schema({
+const HorarioSchema = new mongoose.Schema({
     h_init: {
         type: Date,
         required: true
@@ -10,14 +10,10 @@ const horaSchema = new mongoose.Schema({
         type: Schema.Types.ObjectId,
         ref: 'Especialista'
     },
-    idCita: {
-        type: Schema.Types.ObjectId,
-        ref: 'Cita'
-    },
     diaSemana: {
         type: String,
     }
 });
 
-const Hora = mongoose.model("Hora", horaSchema);
-module.exports = Hora;
+const Horario = mongoose.model("Horario", HorarioSchema);
+module.exports = Horario;

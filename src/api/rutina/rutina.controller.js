@@ -1,14 +1,14 @@
-const especialidadService = require('./especialidad.service');
+const rutinaServices = require('./rutina.service');
 
 module.exports = {
 
-    async createEspecialidad(req, res, next) {
+    async createRutina(req, res, next) {
         try {
-            const result = await especialidadService.createEspecialidad(req.body);
+            const result = await rutinaServices.createRutina(req.body);
             if (!result) {
                 return res.json({
                     status: 'failed',
-                    msg: "Error al crear una Especialidad.",
+                    msg: "Error al crear un Rutina.",
                     code: 0
                 });
             }
@@ -22,13 +22,51 @@ module.exports = {
         }
     },
 
-    async updateEspecialidad(req, res, next) {
+    async updateRutina(req, res, next) {
         try {
-            const result = await especialidadService.updateEspecialidad(req.params.id, req.body);
+            const result = await rutinaServices.updateRutina(req.params.id, req.body);
             if (!result) {
                 return res.json({
                     status: 'failed',
-                    msg: "No se puede actualizar la especialidad.",
+                    msg: "No se puede actualizar el Rutina.",
+                    success: 0
+                });
+            }
+            return res.json({
+                status: 'success',
+                data: result
+            });
+        } catch (exception) {
+            next(exception);
+        }
+
+    },
+    async deleteRutina(req, res, next) {
+        try {
+            const result = await rutinaServices.deleteRutina(req.params.id);
+            if (!result) {
+                return res.json({
+                    status: 'failed',
+                    msg: "No se puede borrar el Rutina.",
+                    success: 0
+                });
+            }
+            return res.json({
+                status: 'success',
+                data: result
+            });
+        } catch (exception) {
+            next(exception);
+        }
+    },
+
+    async getRutinas(req, res, next) {
+        try {
+            const result = await rutinaServices.getRutinas();
+            if (!result) {
+                return res.json({
+                    status: 'failed',
+                    msg: "Error al obtener los Rutinas.",
                     success: 0
                 });
             }
@@ -42,13 +80,13 @@ module.exports = {
 
     },
 
-    async deleteEspecialidad(req, res, next) {
+    async getRutina(req, res, next) {
         try {
-            const result = await especialidadService.deleteEspecialidad(req.params.id);
+            const result = await rutinaServices.getRutina(req.params.id);
             if (!result) {
                 return res.json({
                     status: 'failed',
-                    msg: "No se puede borrar la especialidad.",
+                    msg: "No se puede retornar el Rutina.",
                     success: 0
                 });
             }
@@ -59,66 +97,6 @@ module.exports = {
         } catch (exception) {
             next(exception);
         }
-    },
-
-    async getEspecialidades(req, res, next) {
-        try {
-            const result = await especialidadService.getEspecialidades();
-            if (!result) {
-                return res.json({
-                    status: 'failed',
-                    msg: "Error al obtener las especialidades.",
-                    success: 0
-                });
-            }
-            return res.json({
-                status: 'success',
-                data: result
-            });
-        } catch (exception) {
-            next(exception);
-        }
-
-    },
-
-    async getEspecialidad(req, res, next) {
-        try {
-            const result = await especialidadService.getEspecialidad(req.params.id);
-            if (!result) {
-                return res.json({
-                    status: 'failed',
-                    msg: "No se puede retornar la especialidad.",
-                    success: 0
-                });
-            }
-            return res.json({
-                status: 'success',
-                data: result
-            });
-        } catch (exception) {
-            next(exception);
-        }
-    },
-
-    //Get horas de una especialidad
-    async getHorasEspecialidad(req, res, next) {
-        try {
-            const result = await especialidadService.getHorasEspecialidad(req.params.id);
-            if (!result) {
-                return res.json({
-                    status: 'failed',
-                    msg: "Error al obtener las Especialistas.",
-                    success: 0
-                });
-            }
-            return res.json({
-                status: 'success',
-                data: result
-            });
-        } catch (exception) {
-            next(exception);
-        }
-
     },
 
 
