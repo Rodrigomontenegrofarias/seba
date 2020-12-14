@@ -1,26 +1,60 @@
 version: '3.3'
 
 services:
-    webapp-server:
-      build:
-        context: .
-        dockerfile: Dockerfile.node
-      image: myapp-server-img
-      container_name: myapp-node-express
-      volumes:
-       - .:/usr/src/app
-       - /usr/src/app/node_modules
-      ports:
-        - "8080:8080"
-      depends_on:
-        - mongo
-      env_file: .env
-      environment:
-        - MONGO_HOSTNAME=$MONGO_HOSTNAME
-        - MONGO_PORT=$MONGO_PORT
-        - MONGO_DB=$MONGO_DB
-    mongo:
-      image: mongo
-      container_name: myapp-mongodb
-      ports:
-        - "27017:27017"
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile.node
+    image: myapp-server
+    container_name: backend
+    command: /usr/src/app/node_modules/.bin/nodemon server.js
+    volumes:
+      - ./server/:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongo
+    env_file: ./server/.env
+    environment:
+      - NODE_ENV=development
+    networks:
+      - app-network
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile.react
+    image: myapp-client
+    stdin_open: true
+    container_name: client
+    command: npm start
+    volumes:
+      - ./client/:/usr/app
+      - /usr/app/node_modules
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+
+  mongo:
+    image: mongo
+    volumes:
+      - data-volume:/data/db
+    ports:
+      - "27017:27017"
+    networks:
+      - app-network
+    depends_on: 
+    - client
+  
+
+networks:
+    app-network:
+        driver: bridge
+
+volumes:
+    data-volume:
+    node_modules:
+    web-root:
+      driver: local
